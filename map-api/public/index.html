@@ -204,26 +204,27 @@
 
         map.on('load', function () {
             const data = [
-            { lat: 33.453067, lng: -82.219374, laser_lat: 33.453134, laser_lon: -82.219437 , alt: 10.1},
-                { lat: 33.453021, lng: -82.219425, laser_lat: 33.453118, laser_lon: -82.219519, alt: 15.2},
-                { lat: 33.453015, lng: -82.219434, laser_lat: 33.453151, laser_lon: -82.219566, alt: 20.1 },
-                { lat: 33.452967, lng: -82.219334, laser_lat: 33.453169, laser_lon: -82.219497, alt:25.2 },
-                { lat: 33.452940, lng: -82.219245, laser_lat: 33.453194, laser_lon: -82.219450, alt: 30.8 },
-                { lat: 33.452912, lng: -82.219160, laser_lat: 33.453228, laser_lon: -82.219397, alt: 35.6 },
-                { lat: 33.452915, lng: -82.219138, laser_lat: 33.453268, laser_lon: -82.219412, alt: 40.3 },
-                { lat: 33.452939, lng: -82.219163, laser_lat: 33.453290, laser_lon: -82.219457, alt: 44.5 },
-                { lat: 33.452936, lng: -82.219175, laser_lat: 33.453244, laser_lon: -82.219424, alt: 50.8 },
-                { lat: 33.452912, lng: -82.219179, laser_lat: 33.453328, laser_lon: -82.219542, alt: 55.2 },
-                { lat: 33.452914, lng: -82.219125, laser_lat: 33.453391, laser_lon: -82.219555, alt: 60.7 },
-                { lat: 33.452919, lng: -82.219107, laser_lat: 33.453454, laser_lon: -82.219556, alt: 65.1 },
-                { lat: 33.452906, lng: -82.219104, laser_lat: 33.453499, laser_lon: -82.219584, alt: 70.5 },
-                { lat: 33.452835, lng: -82.219082, laser_lat: 33.453441, laser_lon: -82.219590, alt: 75.2 },
-                { lat: 33.452856, lng: -82.219018, laser_lat: 33.453483, laser_lon: -82.219564, alt: 80.5 },
-                { lat: 33.452860, lng: -82.219009, laser_lat: 33.453536, laser_lon: -82.219620, alt: 85.3 },
-                { lat: 33.452844, lng: -82.218949, laser_lat: 33.453600, laser_lon: -82.219607, alt: 90.6 },
-                { lat: 33.452840, lng: -82.218948, laser_lat: 33.453609, laser_lon: -82.219617, alt:95.6 },
-                { lat: 33.452856, lng: -82.218900, laser_lat: 33.453634, laser_lon: -82.219655, alt: 100.9 }
-            ];
+                { lat: 33.453067, lng: -82.219374, laser_lat: 33.453134, laser_lon: -82.219437 , alt: 10.1, yaw: 277, pitch: -1},
+                { lat: 33.453021, lng: -82.219425, laser_lat: 33.453118, laser_lon: -82.219519, alt: 15.2, yaw: 276, pitch: 0},
+                { lat: 33.453015, lng: -82.219434, laser_lat: 33.453151, laser_lon: -82.219566, alt: 20.1, yaw: 276, pitch: -1},
+                { lat: 33.452967, lng: -82.219334, laser_lat: 33.453169, laser_lon: -82.219497, alt:25.2, yaw: 281, pitch: 0},
+                { lat: 33.452940, lng: -82.219245, laser_lat: 33.453194, laser_lon: -82.219450, alt: 30.8, yaw: 281, pitch: 0},
+                { lat: 33.452912, lng: -82.219160, laser_lat: 33.453228, laser_lon: -82.219397, alt: 35.6, yaw: 283, pitch: 1},
+                { lat: 33.452915, lng: -82.219138, laser_lat: 33.453268, laser_lon: -82.219412, alt: 40.3, yaw: 282, pitch: 0 },
+                { lat: 33.452939, lng: -82.219163, laser_lat: 33.453290, laser_lon: -82.219457, alt: 44.5, yaw: 280, pitch: 0 },
+                { lat: 33.452936, lng: -82.219175, laser_lat: 33.453244, laser_lon: -82.219424, alt: 50.8, yaw: 281, pitch: 0 },
+                { lat: 33.452912, lng: -82.219179, laser_lat: 33.453328, laser_lon: -82.219542, alt: 55.2, yaw: 279, pitch: 0 },
+                { lat: 33.452914, lng: -82.219125, laser_lat: 33.453391, laser_lon: -82.219555, alt: 60.7, yaw: 278, pitch: 0 },
+                { lat: 33.452919, lng: -82.219107, laser_lat: 33.453454, laser_lon: -82.219556, alt: 65.1, yaw: 280, pitch: 1 },
+                { lat: 33.452906, lng: -82.219104, laser_lat: 33.453499, laser_lon: -82.219584, alt: 70.5, yaw: 281, pitch: 1 },
+                { lat: 33.452835, lng: -82.219082, laser_lat: 33.453441, laser_lon: -82.219590, alt: 75.2 , yaw: 280, pitch: -1},
+                { lat: 33.452856, lng: -82.219018, laser_lat: 33.453483, laser_lon: -82.219564, alt: 80.5, yaw: 279, pitch: 0 },
+                { lat: 33.452860, lng: -82.219009, laser_lat: 33.453536, laser_lon: -82.219620, alt: 85.3, yaw: 278, pitch: 0 },
+                { lat: 33.452844, lng: -82.218949, laser_lat: 33.453600, laser_lon: -82.219607, alt: 90.6, yaw: 279, pitch: 1 },
+                { lat: 33.452840, lng: -82.218948, laser_lat: 33.453609, laser_lon: -82.219617, alt:95.6, yaw: 279, pitch: 0 },
+                { lat: 33.452856, lng: -82.218900, laser_lat: 33.453634, laser_lon: -82.219655, alt: 100.9, yaw: 276, pitch: 0 }
+];
+
 
             const geojsonOriginal = {
             type: 'FeatureCollection',
@@ -250,6 +251,8 @@
                 }
             }))
         };
+        console.log(data);
+        console.log(geojsonOriginal);
 
         // Add sources for original and laser points
         map.addSource('originalPoints', {
@@ -332,28 +335,28 @@
         });
 
         // Function to create a popup
-    function createPopup(coordinates, properties) {
-        const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°`;
-        return new mapboxgl.Popup({ offset: 25 })
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
-    }
-
-    // Add mouse event handlers for showing popups
-    map.on('mouseenter', 'originalPoints', function (e) {
-        if (e.features.length > 0) {
-            const coordinates = e.features[0].geometry.coordinates.slice();
-            const properties = e.features[0].properties;
-            createPopup(coordinates, properties);
+        function createPopup(coordinates, properties) {
+            const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°`;
+            return new mapboxgl.Popup({ offset: 25 })
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
         }
-    });
 
-    map.on('mouseleave', 'originalPoints', function () {
-        map.getCanvas().style.cursor = '';
-        if (map.getPopup()) map.getPopup().remove();
-    });
-        
+        // Add mouse event handlers for showing popups
+        map.on('mouseenter', 'originalPoints', function (e) {
+            if (e.features.length > 0) {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const properties = e.features[0].properties;
+                createPopup(coordinates, properties);
+            }
+        });
+
+        map.on('mouseleave', 'originalPoints', function () {
+            map.getCanvas().style.cursor = '';
+            if (map.getPopup()) map.getPopup().remove();
+        });
+            
         function filterByElevation(value) {
             document.getElementById('elevationValue').textContent = value + " meters";
             const elevationThreshold = parseInt(value);
