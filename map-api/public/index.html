@@ -334,6 +334,30 @@
             }
         });
 
+        // Initialize an empty GeoJSON source for the line
+        map.addSource('lineConnection', {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: []
+            }
+        });
+
+        // Add a layer for this source
+        map.addLayer({
+            id: 'lineConnection',
+            type: 'line',
+            source: 'lineConnection',
+            layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            paint: {
+                'line-color': '#FF8C00',
+                'line-width': 4
+            }
+        });
+
         // Function to create a popup
         function createPopup(coordinates, properties) {
             const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°`;
@@ -356,7 +380,43 @@
             map.getCanvas().style.cursor = '';
             if (map.getPopup()) map.getPopup().remove();
         });
-            
+           
+        map.on('click', 'originalPoints', function (e) {
+        if (e.features.length > 0) {
+            const originalFeature = e.features[0];
+            const originalCoords = originalFeature.geometry.coordinates;
+            console.log("Clicked original point coordinates:", originalCoords);
+
+            // Since floating-point precision might be an issue, consider a tolerance when matching or ensure data format is consistent
+            const correspondingLaserPoint = data.find(p =>
+                Math.abs(p.lat - originalCoords[1]) < 0.00001 && 
+                Math.abs(p.lng - originalCoords[0]) < 0.00001
+            );
+
+            if (correspondingLaserPoint) {
+                console.log("Found corresponding laser point:", correspondingLaserPoint);
+                const lineFeature = {
+                    type: 'Feature',
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: [
+                            [originalCoords[0], originalCoords[1]], // Original point coordinates
+                            [correspondingLaserPoint.laser_lon, correspondingLaserPoint.laser_lat] // Laser point coordinates
+                        ]
+                    }
+                };
+
+                map.getSource('lineConnection').setData({
+                    type: 'FeatureCollection',
+                    features: [lineFeature]
+                });
+            } else {
+                console.log("No corresponding laser point found");
+            }
+        }
+    });
+
+
         function filterByElevation(value) {
             document.getElementById('elevationValue').textContent = value + " meters";
             const elevationThreshold = parseInt(value);
@@ -370,6 +430,8 @@
 
         filterByElevation(document.getElementById('elevationRange').value);
     });
+
+    
 </script>
     <footer>
         <div class="footer-content">
