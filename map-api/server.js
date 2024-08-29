@@ -18,7 +18,7 @@ const loadData = () => {
     fs.createReadStream(path.join(__dirname, 'data.csv'))
         .pipe(csv())
         .on('data', (row) => {
-            const { lat, lng, laser_lat, laser_lon, alt, yaw, pitch } = row;
+            const { lat, lng, laser_lat, laser_lon, alt, yaw, pitch,roll } = row;
             dataPoints.push({
                 lat: parseFloat(lat),
                 lng: parseFloat(lng),
@@ -26,7 +26,8 @@ const loadData = () => {
                 laser_lon: parseFloat(laser_lon),
                 alt: parseFloat(alt),
                 yaw: parseFloat(yaw),
-                pitch: parseFloat(pitch)
+                pitch: parseFloat(pitch),
+                roll: parseFloat(roll),
             });
         })
         .on('end', () => {

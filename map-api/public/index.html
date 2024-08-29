@@ -202,238 +202,12 @@
             zoom: 15
         });
 
-//         map.on('load', function () {
-//             const data = [
-//                 { lat: 33.453067, lng: -82.219374, laser_lat: 33.453134, laser_lon: -82.219437 , alt: 10.1, yaw: 277, pitch: -1},
-//                 { lat: 33.453021, lng: -82.219425, laser_lat: 33.453118, laser_lon: -82.219519, alt: 15.2, yaw: 276, pitch: 0},
-//                 { lat: 33.453015, lng: -82.219434, laser_lat: 33.453151, laser_lon: -82.219566, alt: 20.1, yaw: 276, pitch: -1},
-//                 { lat: 33.452967, lng: -82.219334, laser_lat: 33.453169, laser_lon: -82.219497, alt:25.2, yaw: 281, pitch: 0},
-//                 { lat: 33.452940, lng: -82.219245, laser_lat: 33.453194, laser_lon: -82.219450, alt: 30.8, yaw: 281, pitch: 0},
-//                 { lat: 33.452912, lng: -82.219160, laser_lat: 33.453228, laser_lon: -82.219397, alt: 35.6, yaw: 283, pitch: 1},
-//                 { lat: 33.452915, lng: -82.219138, laser_lat: 33.453268, laser_lon: -82.219412, alt: 40.3, yaw: 282, pitch: 0 },
-//                 { lat: 33.452939, lng: -82.219163, laser_lat: 33.453290, laser_lon: -82.219457, alt: 44.5, yaw: 280, pitch: 0 },
-//                 { lat: 33.452936, lng: -82.219175, laser_lat: 33.453244, laser_lon: -82.219424, alt: 50.8, yaw: 281, pitch: 0 },
-//                 { lat: 33.452912, lng: -82.219179, laser_lat: 33.453328, laser_lon: -82.219542, alt: 55.2, yaw: 279, pitch: 0 },
-//                 { lat: 33.452914, lng: -82.219125, laser_lat: 33.453391, laser_lon: -82.219555, alt: 60.7, yaw: 278, pitch: 0 },
-//                 { lat: 33.452919, lng: -82.219107, laser_lat: 33.453454, laser_lon: -82.219556, alt: 65.1, yaw: 280, pitch: 1 },
-//                 { lat: 33.452906, lng: -82.219104, laser_lat: 33.453499, laser_lon: -82.219584, alt: 70.5, yaw: 281, pitch: 1 },
-//                 { lat: 33.452835, lng: -82.219082, laser_lat: 33.453441, laser_lon: -82.219590, alt: 75.2 , yaw: 280, pitch: -1},
-//                 { lat: 33.452856, lng: -82.219018, laser_lat: 33.453483, laser_lon: -82.219564, alt: 80.5, yaw: 279, pitch: 0 },
-//                 { lat: 33.452860, lng: -82.219009, laser_lat: 33.453536, laser_lon: -82.219620, alt: 85.3, yaw: 278, pitch: 0 },
-//                 { lat: 33.452844, lng: -82.218949, laser_lat: 33.453600, laser_lon: -82.219607, alt: 90.6, yaw: 279, pitch: 1 },
-//                 { lat: 33.452840, lng: -82.218948, laser_lat: 33.453609, laser_lon: -82.219617, alt:95.6, yaw: 279, pitch: 0 },
-//                 { lat: 33.452856, lng: -82.218900, laser_lat: 33.453634, laser_lon: -82.219655, alt: 100.9, yaw: 276, pitch: 0 }
-// ];
+        // Fetch the data from the backend
+        fetch('/api/data')
+            .then(response => response.json())
+            .then(data => {
+            console.log(data);
 
-
-//             const geojsonOriginal = {
-//             type: 'FeatureCollection',
-//             features: data.map(point => ({
-//                 type: 'Feature',
-//                 geometry: { type: 'Point', coordinates: [point.lng, point.lat] },
-//                 properties: {
-//                     alt: point.alt,
-//                     yaw: point.yaw,
-//                     pitch: point.pitch
-//                 }
-//             }))
-//         };
-
-//         const geojsonLaser = {
-//             type: 'FeatureCollection',
-//             features: data.map(point => ({
-//                 type: 'Feature',
-//                 geometry: { type: 'Point', coordinates: [point.laser_lon, point.laser_lat] },
-//                 properties: {
-//                     alt: point.alt,
-//                     yaw: point.yaw,
-//                     pitch: point.pitch
-//                 }
-//             }))
-//         };
-//         console.log(data);
-//         console.log(geojsonOriginal);
-
-//         // Add sources for original and laser points
-//         map.addSource('originalPoints', {
-//             type: 'geojson',
-//             data: geojsonOriginal
-//         });
-
-//         map.addSource('laserPoints', {
-//             type: 'geojson',
-//             data: geojsonLaser
-//         });
-
-//         // Add layers for original and laser points
-//         map.addLayer({
-//             id: 'originalPoints',
-//             type: 'circle',
-//             source: 'originalPoints',
-//             paint: {
-//                 'circle-radius': 5,
-//                 'circle-color': '#007cbf'
-//             }
-//         });
-
-//         map.addLayer({
-//             id: 'laserPoints',
-//             type: 'circle',
-//             source: 'laserPoints',
-//             paint: {
-//                 'circle-radius': 5,
-//                 'circle-color': '#FF4500'
-//             }
-//         });
-
-        
-//         // Add the heatmap layer
-//         map.addLayer({
-//             id: 'heatmap',
-//             type: 'heatmap',
-//             source: 'originalPoints',
-//             paint: {
-//                 'heatmap-weight': {
-//                     property: 'alt',
-//                     type: 'exponential',
-//                     stops: [
-//                         [1, 0],
-//                         [62, 1]
-//                     ]
-//                 },
-//                 'heatmap-intensity': {
-//                     stops: [
-//                         [11, 1],
-//                         [15, 3]
-//                     ]
-//                 },
-//                 'heatmap-color': [
-//                     'interpolate',
-//                     ['linear'],
-//                     ['heatmap-density'],
-//                     0, 'rgba(33,102,172,0)',
-//                     0.2, 'rgb(103,169,207)',
-//                     0.4, 'rgb(209,229,240)',
-//                     0.6, 'rgb(253,219,199)',
-//                     0.8, 'rgb(239,138,98)',
-//                     1, 'rgb(178,24,43)'
-//                 ],
-//                 'heatmap-radius': {
-//                     stops: [
-//                         [11, 15],
-//                         [15, 20]
-//                     ]
-//                 },
-//                 'heatmap-opacity': {
-//                     default: 1,
-//                     stops: [
-//                         [14, 1],
-//                         [15, 0]
-//                     ]
-//                 },
-//             }
-//         });
-
-//         // Initialize an empty GeoJSON source for the line
-//         map.addSource('lineConnection', {
-//             type: 'geojson',
-//             data: {
-//                 type: 'FeatureCollection',
-//                 features: []
-//             }
-//         });
-
-//         // Add a layer for this source
-//         map.addLayer({
-//             id: 'lineConnection',
-//             type: 'line',
-//             source: 'lineConnection',
-//             layout: {
-//                 'line-join': 'round',
-//                 'line-cap': 'round'
-//             },
-//             paint: {
-//                 'line-color': '#FF8C00',
-//                 'line-width': 4
-//             }
-//         });
-
-//         // Function to create a popup
-//         function createPopup(coordinates, properties) {
-//             const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°`;
-//             return new mapboxgl.Popup({ offset: 25 })
-//                 .setLngLat(coordinates)
-//                 .setHTML(description)
-//                 .addTo(map);
-//         }
-
-//         // Add mouse event handlers for showing popups
-//         map.on('mouseenter', 'originalPoints', function (e) {
-//             if (e.features.length > 0) {
-//                 const coordinates = e.features[0].geometry.coordinates.slice();
-//                 const properties = e.features[0].properties;
-//                 createPopup(coordinates, properties);
-//             }
-//         });
-
-//         map.on('mouseleave', 'originalPoints', function () {
-//             map.getCanvas().style.cursor = '';
-//             if (map.getPopup()) map.getPopup().remove();
-//         });
-           
-//         map.on('click', 'originalPoints', function (e) {
-//         if (e.features.length > 0) {
-//             const originalFeature = e.features[0];
-//             const originalCoords = originalFeature.geometry.coordinates;
-//             console.log("Clicked original point coordinates:", originalCoords);
-
-//             // Since floating-point precision might be an issue, consider a tolerance when matching or ensure data format is consistent
-//             const correspondingLaserPoint = data.find(p =>
-//                 Math.abs(p.lat - originalCoords[1]) < 0.00001 && 
-//                 Math.abs(p.lng - originalCoords[0]) < 0.00001
-//             );
-
-//             if (correspondingLaserPoint) {
-//                 console.log("Found corresponding laser point:", correspondingLaserPoint);
-//                 const lineFeature = {
-//                     type: 'Feature',
-//                     geometry: {
-//                         type: 'LineString',
-//                         coordinates: [
-//                             [originalCoords[0], originalCoords[1]], // Original point coordinates
-//                             [correspondingLaserPoint.laser_lon, correspondingLaserPoint.laser_lat] // Laser point coordinates
-//                         ]
-//                     }
-//                 };
-
-//                 map.getSource('lineConnection').setData({
-//                     type: 'FeatureCollection',
-//                     features: [lineFeature]
-//                 });
-//             } else {
-//                 console.log("No corresponding laser point found");
-//             }
-//         }
-//     });
-
-
-//         function filterByElevation(value) {
-//             document.getElementById('elevationValue').textContent = value + " meters";
-//             const elevationThreshold = parseInt(value);
-//             map.setFilter('originalPoints', ['<=', ['get', 'alt'], elevationThreshold]);
-//             map.setFilter('laserPoints', ['<=', ['get', 'alt'], elevationThreshold]);
-//         }
-
-//         document.getElementById('elevationRange').addEventListener('input', function(e) {
-//             filterByElevation(e.target.value);
-//         });
-
-//         filterByElevation(document.getElementById('elevationRange').value);
-//     });
-// Fetch the data from the backend
-fetch('/api/data')
-        .then(response => response.json())
-        .then(data => {
             // Process the data and add it to the map
             const geojsonOriginal = {
                 type: 'FeatureCollection',
@@ -443,11 +217,12 @@ fetch('/api/data')
                     properties: {
                         alt: point.alt,
                         yaw: point.yaw,
-                        pitch: point.pitch
+                        pitch: point.pitch,
+                        roll: point.roll
                     }
                 }))
             };
-
+            
             const geojsonLaser = {
                 type: 'FeatureCollection',
                 features: data.map(point => ({
@@ -492,6 +267,37 @@ fetch('/api/data')
                 }
             });
 
+            // Define the initial drone position
+            var droneInitialPosition = {
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-82.2194838, 33.4530524] // Corrected coordinates (longitude first, latitude second)
+                    },
+                    properties: {
+                        description: 'Initial Drone Position'
+                    }
+                }]
+            };
+
+            // Add the initial drone position source and layer to the map
+            map.addSource('droneInitialPosition', {
+                type: 'geojson',
+                data: droneInitialPosition
+            });
+
+            map.addLayer({
+                id: 'droneInitialPosition',
+                type: 'circle',
+                source: 'droneInitialPosition',
+                paint: {
+                    'circle-radius': 8, // Larger radius for visibility
+                    'circle-color': '#FF00FF' 
+                }
+            });
+            
             map.addLayer({
                 id: 'heatmap',
                 type: 'heatmap',
@@ -606,7 +412,7 @@ fetch('/api/data')
             });
 
             function createPopup(coordinates, properties) {
-                const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°`;
+                const description = `<strong>Altitude:</strong> ${properties.alt}m<br><strong>Yaw:</strong> ${properties.yaw}°<br><strong>Pitch:</strong> ${properties.pitch}°<br><strong>Roll:</strong> ${properties.roll}°`;
                 return new mapboxgl.Popup({ offset: 25 })
                     .setLngLat(coordinates)
                     .setHTML(description)
